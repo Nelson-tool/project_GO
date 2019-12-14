@@ -2,7 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
+	"net/http"
+
 	"github.com/gorilla/websocket"
+	uuid "github.com/satori/go.uuid"
 )
 
 //createstructureforclient manager
@@ -27,39 +31,99 @@ type Message struct {
 	Content   string `json:"content, omitempty"`
 }
 
-var manager = ClientManager {
+var manager = ClientManager{
 	clients:    make(map[*Client]bool),
 	broadcast:  make(chan []byte),
 	register:   make(chan *Client),
 	unregister: make(chan *Client),
 }
 
-//we will create 3 goroutines one for managing client , one for reading socket, and one for writing
+func (manager *ClientManager) send(message []byte, ignore *Client) {
+	for regis := range manager.clients {
+		if regis != ignore {
+			regis.send <- message
+		}
+	}
+}
 
-func  (manager *ClientManager) start(){
+// the func start is a method we will create 3 channel one for managing client , one for reading socket, and one for writing
+
+func (manager *ClientManager) start() {
 	for {
 		select {
 		case regis := <-manager.register:
 			manager.clients[regis] = true
-			jsonMessage,_ := json.Marshal(&Message{Content:"/A new socket has connected"})
+			jsonMessage, _ := json.Marshal(&Message{Content: "/A new socket has connected"})
 			manager.send(jsonMessage, regis)
 		case regis := <-manager.unregister:
-			if _, client_ok := manager.clients[regis]; client_ok {
+			if _, clientOk := manager.clients[regis]; clientOk {
 				close(regis.send)
 				delete(manager.clients, regis)
-				jsonMessage, _ := json.Marshal(&Message{Content:"/A new socket has disconnected"})
+				jsonMessage, _ := json.Marshal(&Message{Content: "/A new socket has disconnected"})
 				manager.send(jsonMessage, regis)
 			}
-		case regis := <-manager.broadcast:
-			for regis := 
+		case message := <-manager.broadcast:
+			for regis := range manager.clients {
+				select {
+				case regis.send <- message:
+				default:
+					close(regis.send)
+					delete(manager.clients, regis)
+				}
+			}
 
 		}
 
 	}
+}
+func (rw *Client) read() {
+	defer func() {
+		manager.unregister <- rw
+		rw.socket.Close()
+	}()
+	for {
+		_, message, err := rw.socket.ReadMessage()
+		if err != nil {
+			manager.unregister <- rw
+			rw.socket.Close()
+			break
+		}
+		jsonMessage, _ := json.Marshal(&Message{Sender: rw.id, Content: string(message)})
+		manager.broadcast <- jsonMessage
+	}
+}
 
-	
+func (rw *Client) write() {
+	defer func() {
+		rw.socket.Close()
+	}()
+	for {
+		select {
+		case message, clientOk := <-rw.send:
+			if !clientOk {
+				rw.socket.WriteMessage(websocket.CloseMessage, []byte{})
+				return
+			}
+			rw.socket.WriteMessage(websocket.TextMessage, message)
+		}
+	}
+}
+func wsPage(res http.ResponseWriter, req *http.Request) {
+	conn, error := (&websocket.Upgrader{CheckOrigin: func(r *http.Request) bool { return true }}).Upgrade(res, req, nil)
+	if error != nil {
+		http.NotFound(res, req)
+		return
+	}
+	client := &Client{id: uuid.NewV4().String(), socket: conn, send: make(chan []byte)}
+	manager.register <- client
+
+	go client.read()
+	go client.write()
 }
 
 func main() {
-
+	fmt.Println("Starting server...")
+	go manager.start()
+	http.HandleFunc("/ws", wsPage)
+	http.ListenAndServe(":12345", nil)
 }
