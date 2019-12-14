@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"github.com/gorilla/websocket"
 )
 
@@ -21,12 +22,12 @@ type Client struct {
 }
 
 type Message struct {
-	Sender    string `json:"Sender,omitempty"`
+	Sender    string `json:"sender,omitempty"`
 	Recipient string `json:"recipient, omitempty"`
 	Content   string `json:"content, omitempty"`
 }
 
-var manager = ClientManager{
+var manager = ClientManager {
 	clients:    make(map[*Client]bool),
 	broadcast:  make(chan []byte),
 	register:   make(chan *Client),
@@ -35,7 +36,27 @@ var manager = ClientManager{
 
 //we will create 3 goroutines one for managing client , one for reading socket, and one for writing
 
-func  start(manager *ClientManager) {
+func  (manager *ClientManager) start(){
+	for {
+		select {
+		case regis := <-manager.register:
+			manager.clients[regis] = true
+			jsonMessage,_ := json.Marshal(&Message{Content:"/A new socket has connected"})
+			manager.send(jsonMessage, regis)
+		case regis := <-manager.unregister:
+			if _, client_ok := manager.clients[regis]; client_ok {
+				close(regis.send)
+				delete(manager.clients, regis)
+				jsonMessage, _ := json.Marshal(&Message{Content:"/A new socket has disconnected"})
+				manager.send(jsonMessage, regis)
+			}
+		case regis := <-manager.broadcast:
+			for regis := 
+
+		}
+
+	}
+
 	
 }
 
