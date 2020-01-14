@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/websocket"
 	uuid "github.com/satori/go.uuid"
@@ -116,14 +117,22 @@ func wsPage(res http.ResponseWriter, req *http.Request) {
 	}
 	client := &Client{id: uuid.NewV4().String(), socket: conn, send: make(chan []byte)}
 	manager.register <- client
-
+	fmt.Println("ok")
 	go client.read()
 	go client.write()
+}
+func checkerro(err error) {
+	if err != nil {
+
+		fmt.Println("Fatal error ", err.Error())
+		os.Exit(1)
+	}
 }
 
 func main() {
 	fmt.Println("Starting server...")
 	go manager.start()
 	http.HandleFunc("/ws", wsPage)
-	http.ListenAndServe(":12345", nil)
+	err := http.ListenAndServe(":12345", nil)
+	checkerro(err)
 }
