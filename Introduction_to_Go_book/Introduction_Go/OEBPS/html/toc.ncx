@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx version="2005-1" xmlns="http://www.daisy.org/z3986/2005/ncx/">
+<head>
+<meta name="dtb:uid" content="9780132919005"/>
+<meta name="dtb:depth" content="1"/>
+<meta name="dtb:totalPageCount" content="0"/>
+<meta name="dtb:maxPageNumber" content="0"/>
+</head>
+<docTitle>
+<text>The Go Programming Language: Phrasebook</text>
+</docTitle>
+<navMap>
+<navPoint id="title" playOrder="1">
+<navLabel>
+<text>Title Page</text>
+</navLabel>
+<content src="title.html"/>
+</navPoint>
+<navPoint id="copy" playOrder="2">
+<navLabel>
+<text>Copyright Page</text>
+</navLabel>
+<content src="copy.html"/>
+</navPoint>
+<navPoint id="toc" playOrder="3">
+<navLabel>
+<text>Table of Contents</text>
+</navLabel>
+<content src="toc.html"/>
+</navPoint>
+<navPoint id="pref01" playOrder="4">
+<navLabel>
+<text>About the Author</text>
+</navLabel>
+<content src="pref01.html"/>
+</navPoint>
+<navPoint id="pref02" playOrder="5">
+<navLabel>
+<text>Acknowledgments</text>
+</navLabel>
+<content src="pref02.html"/>
+</navPoint>
+<navPoint id="ch01" playOrder="6">
+<navLabel>
+<text>1. Introducing Go</text>
+</navLabel>
+<content src="ch01.html"/>
+</navPoint>
+<navPoint id="ch02" playOrder="7">
+<navLabel>
+<text>2. A Go Primer</text>
+</navLabel>
+<content src="ch02.html"/>
+</navPoint>
+<navPoint id="ch03" playOrder="8">
+<navLabel>
+<text>3. Numbers</text>
+</navLabel>
+<content src="ch03.html"/>
+</navPoint>
+<navPoint id="ch04" playOrder="9">
+<navLabel>
+<text>4. Common Go Patterns</text>
+</navLabel>
+<content src="ch04.html"/>
+</navPoint>
+<navPoint id="ch05" playOrder="10">
+<navLabel>
+<text>5. Arrays and Slices</text>
+</navLabel>
+<content src="ch05.html"/>
+</navPoint>
+<navPoint id="ch06" playOrder="11">
+<navLabel>
+<text>6. Manipulating Strings</text>
+</navLabel>
+<content src="ch06.html"/>
+</navPoint>
+<navPoint id="ch07" playOrder="12">
+<navLabel>
+<text>7. Working with Collections</text>
+</navLabel>
+<content src="ch07.html"/>
+</navPoint>
+<navPoint id="ch08" playOrder="13">
+<navLabel>
+<text>8. Handling Errors</text>
+</navLabel>
+<content src="ch08.html"/>
+</navPoint>
+<navPoint id="ch09" playOrder="14">
+<navLabel>
+<text>9. Goroutines</text>
+</navLabel>
+<content src="ch09.html"/>
+</navPoint>
+<navPoint id="ch10" playOrder="15">
+<navLabel>
+<text>10. Concurrency Design Patterns</text>
+</navLabel>
+<content src="ch10.html"/>
+</navPoint>
+<navPoint id="ch11" playOrder="16">
+<navLabel>
+<text>11. Dates and Times</text>
+</navLabel>
+<content src="ch11.html"/>
+</navPoint>
+<navPoint id="ch12" playOrder="17">
+<navLabel>
+<text>12. Accessing Files and the Environment</text>
+</navLabel>
+<content src="ch12.html"/>
+</navPoint>
+<navPoint id="ch13" playOrder="18">
+<navLabel>
+<text>13. Network Access</text>
+</navLabel>
+<content src="ch13.html"/>
+</navPoint>
+<navPoint id="ch14" playOrder="19">
+<navLabel>
+<text>14. Web Applications</text>
+</navLabel>
+<content src="ch14.html"/>
+</navPoint>
+<navPoint id="ch15" playOrder="20">
+<navLabel>
+<text>15. Interacting with the Go Runtime</text>
+</navLabel>
+<content src="ch15.html"/>
+</navPoint>
+<navPoint id="ch16" playOrder="21">
+<navLabel>
+<text>16. Distributing Go Code</text>
+</navLabel>
+<content src="ch16.html"/>
+</navPoint>
+<navPoint id="ch17" playOrder="22">
+<navLabel>
+<text>17. Debugging Go</text>
+</navLabel>
+<content src="ch17.html"/>
+</navPoint>
+<navPoint id="index" playOrder="23">
+<navLabel>
+<text>Index</text>
+</navLabel>
+<content src="index.html"/>
+</navPoint>
+<navPoint id="footnotes" playOrder="24">
+<navLabel>
+<text>Footnotes</text>
+</navLabel>
+<content src="footnotes.html"/>
+<navPoint id="footnotes1" playOrder="25">
+<navLabel>
+<text>Chapter 1</text>
+</navLabel>
+<content src="footnotes.html#footnotes1"/>
+</navPoint>
+<navPoint id="footnotes2" playOrder="26">
+<navLabel>
+<text>Chapter 2</text>
+</navLabel>
+<content src="footnotes.html#footnotes2"/>
+</navPoint>
+<navPoint id="footnotes3" playOrder="27">
+<navLabel>
+<text>Chapter 3</text>
+</navLabel>
+<content src="footnotes.html#footnotes3"/>
+</navPoint>
+<navPoint id="footnotes4" playOrder="28">
+<navLabel>
+<text>Chapter 6</text>
+</navLabel>
+<content src="footnotes.html#footnotes4"/>
+</navPoint>
+<navPoint id="footnotes5" playOrder="29">
+<navLabel>
+<text>Chapter 8</text>
+</navLabel>
+<content src="footnotes.html#footnotes5"/>
+</navPoint>
+<navPoint id="footnotes6" playOrder="30">
+<navLabel>
+<text>Chapter 15</text>
+</navLabel>
+<content src="footnotes.html#footnotes6"/>
+</navPoint>
+<navPoint id="footnotes7" playOrder="31">
+<navLabel>
+<text>Chapter 16</text>
+</navLabel>
+<content src="footnotes.html#footnotes7"/>
+</navPoint>
+</navPoint>
+</navMap>
+</ncx>
